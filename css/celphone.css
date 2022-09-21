@@ -30,7 +30,7 @@
 
 .logo {
     position: fixed;
-    width: 11%;
+    width: 15%;
     height: 22%;
 }
 
@@ -69,13 +69,22 @@
     padding-left: 5%;
     height: 80%;
     float: left;
+    font-size: 1em;
 }
 
 .sobre img {
     margin-top: 5%;
-    margin-left: 15%;
-    width: 35%;
+    margin-left: 16%;
+    width: 32%;
     height: 35%;
+    border: 1px solid #000000; 
+}
+
+.sobre .img2 {
+    margin-top: 5%;
+    margin-left: 16%;
+    width: 32%;
+    height: 28%;
     border: 1px solid #000000; 
 }
 
@@ -258,17 +267,8 @@
 
 .imagem img {
     margin-top: 5%;
-    margin-left: 15%;
-    width: 35%;
-    height: 35%;
+    margin-left: 12%;
+    width: 30%;
+    height: 20%;
     border: 1px solid #000000; 
-}
-
-.imagem div img {
-    margin-top: 5%;
-    margin-left: 15%;
-    width: 35%;
-    height: 35%;
-    border: 1px solid #000000; 
-    float: left;
 }

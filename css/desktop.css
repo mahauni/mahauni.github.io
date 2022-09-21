@@ -73,7 +73,6 @@
 }
 
 .sobre img {
-    background-color: cyan;
     margin-top: 5%;
     margin-left: 16%;
     width: 32%;
@@ -82,7 +81,6 @@
 }
 
 .sobre .img2 {
-    background-color: cyan;
     margin-top: 5%;
     margin-left: 16%;
     width: 32%;
@@ -273,20 +271,9 @@
 }
 
 .imagem img {
-    background-color: cyan;
     margin-top: 5%;
-    margin-left: 15%;
+    margin-left: 12%;
     width: 30%;
     height: 20%;
     border: 1px solid #000000; 
-}
-
-.imagem div img {
-    background-color: cyan;
-    margin-top: 5%;
-    margin-left: 15%;
-    width: 30%;
-    height: 30%;
-    border: 1px solid #000000;
-    float: left; 
 }
