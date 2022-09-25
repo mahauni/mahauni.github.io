@@ -20,7 +20,6 @@
                     <li><a href="#I">Imagens</a></li>
                     <li><a href="#H">Hardware</a></li>
                     <li><a href="#A">Arma</a></li>
-                    <li><a href="#R">Robo</a></li>
                     <li><a href="#V">Videos</a></li>
                     <li><a href="#E">Equipe</a></li>
                     <li><a href="socio.html">Seja nosso sócio</a></li>
@@ -59,23 +58,31 @@
                 <!-- Imagens , textos ,etc para colocar aqui dentro-->
 
             
-                    <img class="impar_img" src="./img/Projeto_abelha_2png.png">
+                    <img class="impar_img" src="./img/arduino_breadboard.jfif">
 
-                    <p class="impar_p"> Arduino UNO, breadboard</p>
+                    <p class="impar_p"> Em nosso hardware, umas das partes principais de nosso robô seria a placa Arduino Uno, pois ela que é o cérebro de nosso robô. Ela interpreta as informações que jogamos para ela, sendo estímulos ditados por nossos sensores de fim de curso, ou pelo bluetooth (HC-05), e dependendo de qual for a informação, ela performa diferentes ações, podendo ser andar para frente, ativar a arma entre outras coisas. E juntamente com o breadboard, o objeto branco ao lado de nosso Arduino, que serve como um suporte para ajudar na fiação do robô. </p>
 
-                    <p class="pair_p"> HC-05 </p>
+                    <p class="pair_p"> Para captarmos as instruções do celular e mandar para o nosso robô para ele andar, utilizamos o HC-05, que é um dispositivo bluetooth. O que ele faz é ficar esperando as informações do celular, então quando é recebido algo, ele manda a informação para o Arduino por meio de fios. </p>
 
-                    <img class="pair_img" src="./img/Projeto_abelha_2png.png"> 
+                    <img class="pair_img" src="./img/hc05.jfif"> 
                     
                     
-                    <img class="impar_img" src="./img/Projeto_abelha_2png.png">
+                    <img class="impar_img" src="./img/shieldl298n.jfif">
 
-                    <p class="impar_p"> Shield lsc95(nao lembro exatamente o nome) </p>
+                    <p class="impar_p"> Esse equipamento se chama Shield l298n, e ele é responsável por uma variedade de funções. Ele é responsável por diminuir a voltagem das baterias para uma voltagem (não perigosa) para o Arduino, ele recebe também informações que o Arduino passa para ela sinais altos e baixos, 1 e 0, e dependendo da combinação entre eles, ele faz com que os motores consigam movimentar o carrinho para todos os lados. </p>
 
-                    <p class="pair_p"> Motores de redução </p>
+                    <p class="pair_p"> Os motores de redução são partes que todos provavelmente conhecem e que são fundamentais para nosso robô, ao receber uma voltagem entre um limite conhecido, os motores aceleram de acordo com a voltagem oferecida para o motor. Eles são chamados de redução, por causa de engrenagens dentro dele que faz com que o RPM dele diminua e seja possível passar uma voltagem maior, assim o motor em si faz uma força maior em uma distancia menor, o que é bom para as rodas, já que elas tem que fazer um alto torque para mexer o robô inteiro </p>
 
-                    <img class="pair_img" src="./img/Projeto_abelha_2png.png"> 
+                    <img class="pair_img" src="./img/motor_reducao.jfif"> 
+
+                    <img class="impar_img" src="./img/sensor_fim_curso.webp">
+
+                    <p class="impar_p"> Os sensores fim de curso são responsáveis pela ativação de nossa arma. Eles funcionam de acordo com uma alavanca, quando essa alavanca desce, ela ativa um botão, um switch, que quando ativado, ela passa corrente. Essa corrente que é passada, o nosso Arduino percebe a mudança, e quando essa mudança ocorre ele ativa a arma. </p>
                 
+            </div>
+
+            <div class="arma" id="A">
+                <p> ARQUI VAI FICAR A ARMA LOL COMEAGOAINGAOI NFA</p>
             </div>
 
             <div id="E" class="equipe">
@@ -94,15 +101,15 @@
                 <ul>
                     <div class="whatz">
                         <img src="./img/OIP.jpg">
-                        <p> 55 +11 99999-9999 </p>
+                        <p> 55 +11 97759-2872 </p>
                     </div>
                     <div class="insta">    
                         <img src="./img/th.jpg">
-                        <p> https://instagram.example.com </p>
+                        <p> https://instagram.com/mahauni </p>
                     </div>
                     <div class="face">
                         <img src="./img/th (1).jpg">
-                        <p> https://facebook.example.com </p>
+                        <p> https://facebook.com/mahauni </p>
                     </div>
                 </ul>
             </div>

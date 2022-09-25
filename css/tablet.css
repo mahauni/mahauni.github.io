@@ -29,8 +29,11 @@
 
 .logo {
     position: fixed;
-    width: 11%;
+    width: 15.65%;
     height: 22%;
+
+    border: 2px solid #000000;
+
 }
 
 .title {
@@ -93,7 +96,7 @@
     margin-right: 10%; 
     margin-top: 8%;
     border: 2px solid #000000;
-    height: 1400px;
+    height: 1750px;
 }
 
 .componentes h2 {
@@ -104,44 +107,50 @@
 }
 
 .componentes .impar_p {
-    width: 45%;
-    padding-left: 5%;
-    height: 20%;
+    width: 50%;
+    height: 290px;
     border: 1px solid #000000;
-    background-color: orange;
     float: left;
     margin-left: 5%;
+
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 30px;
 }
 
 .componentes .impar_img {
     margin-top: 2%;
     margin-left: 5%;
     width: 35%;
-    height: 20%;
+    height: 290px;
     border: 1px solid #000000;
     float: left;
-    background-color: orangered;
 }
 
 .componentes .pair_p {
-    width: 45%;
-    padding-left: 5%;
-    height: 20%;
-    border: 1px solid aquamarine;
+    width: 50%;
+    height: 290px;
+    border: 1px solid black;
     float: left;
-    background-color: blueviolet;
     margin-left: 5%;
     margin-bottom: 0px;
     margin-top: 11px;
+
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 30px;
 }
 
 .componentes .pair_img {
     margin-top: 2%;
     margin-left: 5%;
     width: 35%;
-    height: 20%;
-    border: 1px solid aquamarine;
-    background-color: blue;
+    height: 290px;
+    border: 1px solid black;
     float: left;
 }
 
