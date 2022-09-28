@@ -319,3 +319,41 @@
     height: 100px;
     border: 1px solid #000000; 
 }
+
+.video {
+    background-color: gainsboro;
+    margin-left: 20%;
+    margin-right: 10%; 
+    margin-top: 8%;
+    border: 2px solid #000000;
+    height: 800px;
+}
+
+.video p {
+    width: 100%;
+    padding-left: 12%;
+    height: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+}
+
+.video .description {
+    width: 100%;
+    padding-left: 6%;
+    height: 20px;
+}
+
+.video img {
+    margin-top: 5%;
+    margin-left: 6%;
+    width: 75%;
+    height: 100px;
+    border: 1px solid #000000; 
+}
+
+.row {
+    padding-left: 8.5%;
+    width: 40%;
+    float: left;
+}
+
