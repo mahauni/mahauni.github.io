@@ -452,3 +452,44 @@
     font-size: 1.3em;
     text-align: center;
 }
+
+.socioConteudo{
+    background-color: gainsboro;
+    margin-left: 20%;
+    margin-right: 10%; 
+    margin-top: 8%;
+    border: 2px solid #000000;
+    height: 750px;
+    
+}
+
+.socioConteudo p {
+    width: 90%;
+    padding-left: 5%;
+    height: 80%;
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    
+}
+
+.botao {
+    font-size: 2.5em;
+    align-content: center;
+    border-radius: 10000px;
+    margin-left: 20%;
+    margin-right: 10%; 
+    border: 2px solid #000000;
+    background-color: gainsboro;
+    margin-top: 100px;
+}
+
+.botao a {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-decoration: none;
+    margin-left: 30%;
+    padding-right: 20%;
+    text-align: center;
+}
