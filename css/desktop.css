@@ -491,6 +491,14 @@
     
 }
 
+.socioConteudo h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+    color: black;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 .socioConteudo p {
     width: 90%;
     padding-left: 5%;
@@ -499,6 +507,12 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5em;
     
+}
+
+.data {
+    margin-left: 35%;
+    margin-right: 5%; 
+    margin-top: 8%;
 }
 
 .botao {
