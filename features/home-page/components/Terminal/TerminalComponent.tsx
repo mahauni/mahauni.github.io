@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
-  Terminal,
-  ITerminalOptions,
-  ITerminalAddon,
-  ITerminalInitOnlyOptions,
+  type ITerminalOptions,
+  type ITerminalAddon,
+  type ITerminalInitOnlyOptions,
 } from "@xterm/xterm";
+import { Terminal } from "@xterm/xterm";
 import PropTypes from "prop-types";
 import "@xterm/xterm/css/xterm.css";
 
