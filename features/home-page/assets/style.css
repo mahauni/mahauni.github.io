@@ -1,0 +1,6 @@
+:root {
+    --primary: #5f43b2; /* violet */
+    --accent: #3a3153; /* deep plum */
+    --glass: rgba(255, 255, 255, 0.04);
+    --muted: rgba(255, 255, 255, 0.55);
+}

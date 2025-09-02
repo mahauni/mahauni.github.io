@@ -1,11 +1,11 @@
-import HomePage from '/features/home-page'
+import HomePage from "../../features/home-page";
 
 function HomePageRoute() {
-    return (
-        <>
-            <HomePage />
-        </>
-    )
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
 
-export default HomePageRoute
+export default HomePageRoute;

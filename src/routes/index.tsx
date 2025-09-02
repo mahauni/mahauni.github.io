@@ -1,11 +1,11 @@
-import HomePageRoute from "./homePage"
+import HomePageRoute from "./homePage";
 
 function App() {
-    return (
-        <>
-            <HomePageRoute />
-        </>
-    )
+  return (
+    <>
+      <HomePageRoute />
+    </>
+  );
 }
 
-export default App
+export default App;
