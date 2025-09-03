@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import TerminalComponent from "./components/Terminal/TerminalComponent";
 import commandOuputs from "./utils/commands";
+import { logo } from "./utils/logo.ts";
 import { FitAddon } from "@xterm/addon-fit";
 import { TokyoNightTheme } from "./utils/tokyonight";
 import { WebLinksAddon } from "@xterm/addon-web-links";
@@ -14,9 +15,7 @@ export default function HomePage() {
   const terminalRef = useRef<any>(null);
 
   useEffect(() => {
-    terminalRef.current?.terminal.writeln(
-      `Enter "help" to see the list of supported commands\r\n\rPress (Cntl + L) to clear the console`,
-    );
+    terminalRef.current?.terminal.writeln(logo);
     terminalRef.current?.terminal.write(terminalHostName);
 
     window.addEventListener("resize", () => {

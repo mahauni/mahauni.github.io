@@ -1,3 +1,5 @@
+import { logo } from "./logo";
+
 const commandsList: string[] = [
   "help",
   "ls",
@@ -6,6 +8,7 @@ const commandsList: string[] = [
   "ps",
   "fastfetch",
   "links",
+  "logo",
 ];
 
 const commandOuputs = async (command: string, filesList: string[]) => {
@@ -30,6 +33,9 @@ const commandOuputs = async (command: string, filesList: string[]) => {
 
     case commandsList[6]:
       return links;
+
+    case commandsList[7]:
+      return logo;
 
     default:
       return `bash: command not found: ${command}.\r\n\rEnter "help" to see the list of supported commands`;
