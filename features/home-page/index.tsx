@@ -44,43 +44,43 @@ export default function HomePage() {
     }
 
     switch (code) {
-      case 12:
-        terminal.reset();
+    case 12:
+      terminal.reset();
+      terminal.write(terminalHostName);
+      break;
+
+    case 13:
+      commandOuputs(terminalText, []).then((output) => {
+        terminal.write(`\r\n${output}\r\n`);
         terminal.write(terminalHostName);
-        break;
+        setTerminalText("");
+      });
+      break;
 
-      case 13:
-        commandOuputs(terminalText, []).then((output) => {
-          terminal.write(`\r\n${output}\r\n`);
-          terminal.write(terminalHostName);
-          setTerminalText("");
-        });
-        break;
+    case 27:
+      if (data.endsWith("A") || data.endsWith("B")) return;
 
-      case 27:
-        if (data.endsWith("A") || data.endsWith("B")) return;
+      terminal.write(data);
+      setTerminalText((prevState) => prevState + data);
+      break;
 
-        terminal.write(data);
-        setTerminalText((prevState) => prevState + data);
-        break;
+    case 127:
+      if (terminalText) {
+        terminal.write(`\b \b`);
+        setTerminalText((prevState) =>
+          prevState.substring(0, prevState.length - 1),
+        );
+      }
+      break;
 
-      case 127:
-        if (terminalText) {
-          terminal.write(`\b \b`);
-          setTerminalText((prevState) =>
-            prevState.substring(0, prevState.length - 1),
-          );
-        }
-        break;
-
-      default:
-        terminal.write(data);
-        setTerminalText((prevState) => prevState + data);
+    default:
+      terminal.write(data);
+      setTerminalText((prevState) => prevState + data);
     }
   }
 
   return (
-    <div className="h-screen, w-screen">
+    <div className="h-screen, w-screen pl-2">
       <TerminalComponent
         className="h-screen w-screen"
         addons={[fitAddon, webLiinksAddon]}
