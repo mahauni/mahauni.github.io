@@ -5,12 +5,14 @@ import { logo } from "./utils/logo.ts";
 import { FitAddon } from "@xterm/addon-fit";
 import { TokyoNightTheme } from "./utils/tokyonight";
 import { WebLinksAddon } from "@xterm/addon-web-links";
+import { useFiles } from "../../hooks/useFiles.tsx";
 
 export default function HomePage() {
   const [terminalText, setTerminalText] = useState("");
-  const terminalHostName = "root@mahauni~$ ";
+  const terminalHostName = "mahauni@debian~$ ";
   const fitAddon = new FitAddon();
   const webLiinksAddon = new WebLinksAddon();
+  const files = useFiles()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const terminalRef = useRef<any>(null);
 
@@ -50,7 +52,7 @@ export default function HomePage() {
       break;
 
     case 13:
-      commandOuputs(terminalText, []).then((output) => {
+      commandOuputs(terminalText, files).then((output) => {
         terminal.write(`\r\n${output}\r\n`);
         terminal.write(terminalHostName);
         setTerminalText("");
