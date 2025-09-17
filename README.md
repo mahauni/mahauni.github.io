@@ -1,5 +1,8 @@
 # React + TypeScript + Vite
 
+BrowserFS
+https://github.com/jvilk/BrowserFS
+
 Add files support idk how but do it
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
