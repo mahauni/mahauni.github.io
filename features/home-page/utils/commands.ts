@@ -2,13 +2,6 @@ import { type SystemFiles, type File } from "../../../hooks/useFiles";
 import { logo } from "./logo";
 import fs from "@zenfs/core"
 
-function splitCommand(commandString: string): string {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [command, _] = commandString.split(/(?<=^\S+)\s/)
-
-  return command
-}
-
 function ltrim(str: string): string {
   if(!str) return str;
   return str.replace(/^\s+/g, '');
@@ -44,7 +37,7 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
   case commandsList[7]:
     return logo;
 
-  case splitCommand(commandsList[8]):
+  case commandsList[8]:
     fileSystem.touchFile(ltrim(args));
     return ""
 
@@ -101,11 +94,11 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
   }
 
   case commandsList[13]:
-    fileSystem.removeFile(args);
+    fileSystem.createDir(args);
     return ""
 
   case commandsList[14]:
-    fileSystem.removeFile(args);
+    fileSystem.removeDir(args);
     return ""
 
   case commandsList[15]:
@@ -126,7 +119,7 @@ const commandsList: string[] = [
   "fastfetch",
   "links",
   "logo",
-  "touch <filename>",
+  "touch",
   "echo",
   "rm",
   "cd",
@@ -139,23 +132,23 @@ const commandsList: string[] = [
 // ajustar os commandos
 const help = `List of supported commands:\r\n
 Normal commands supported like bash:\r\t
-ls \t\t  list all files in directory\r\t
-pwd\t\t  print the current directory\r\t
-hostname\t  print the hostname\r\t
-ps\t\t  snap of current process\r\t
-touch <filename> create a file\r\t
-echo\t\t  echo something\r\t
-rm\t\t  remove a file\r\t
-cd\t\t  changing directory\r\t
-cat\t\t  print the contents of a file\r\t
-mkdir\t\t  make a directory\r\t
-rmdir\t\t  remove a directory\r\n
+ls \t\t   list all files in directory\r\t
+pwd\t\t   print the current directory\r\t
+hostname\t   print the hostname\r\t
+ps\t\t   snap of current process\r\t
+touch <filename>   create a file\r\t
+echo\t\t   echo something\r\t
+rm <filename>\t   remove a file\r\t
+cd <directory>\t   changing directory\r\t
+cat <filename>\t   print the contents of a file\r\t
+mkdir <directory>  make a directory\r\t
+rmdir <directory>  remove a directory\r\n
 Custom commands supported:\r\t
-help\t\t  list all commands available\r\t
-fastfetch\t  fetch system information\r\t
-links\t\t  print my links\r\t
-logo\t\t  print the logo\r\t
-blog\t\t  go to my blog\r\t
+help\t   list all commands available\r\t
+fastfetch  fetch system information\r\t
+links\t   print my links\r\t
+logo\t   print the logo\r\t
+blog\t   go to my blog\r\t
 `;
 
 const DEBIAN_COLOR = "\u001b[38;2;215;10;83m";

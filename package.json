@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "@tanstack/react-router": "^1.131.49",
+    "@tanstack/react-router-devtools": "^1.131.49",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/addon-web-links": "^0.11.0",
     "@xterm/xterm": "^5.5.0",
@@ -28,10 +30,12 @@
     "react-dom": "^19.1.1",
     "react-i18next": "^15.6.1",
     "tailwindcss": "^3.4.17",
+    "tslib": "^2.8.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@tanstack/router-plugin": "^1.131.49",
     "@types/prop-types": "^15.7.15",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",

@@ -1,11 +1,15 @@
-import HomePageRoute from "./homePage";
+import HomePage from "../../features/home-page";
 
-function App() {
+import { createFileRoute } from "@tanstack/react-router"
+
+export const Route = createFileRoute("/")({
+  component: Index,
+})
+
+function Index() {
   return (
     <>
-      <HomePageRoute />
+      <HomePage />
     </>
   );
 }
-
-export default App;

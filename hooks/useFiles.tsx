@@ -9,6 +9,8 @@ export interface SystemFiles {
     redirectionFile: (file: File) => void
     appendRedirectionFile: (file: File) => void
     removeFile: (filename: string) => void
+    createDir: (directory: string) => void
+    removeDir: (directory: string) => void
 }
 
 export type File = {
@@ -135,5 +137,13 @@ export const useFiles = create<SystemFiles>()((set, get) => ({
     set(({ files }) => ({
       files: files.splice(files.findIndex(v => v.name !== filename), 1)
     }))
+  },
+  createDir: (directory) => {
+    const currDir = get().currentDir
+    fs.mkdirSync(`${currDir}/${directory}`, { recursive: false })
+  },
+  removeDir: (directory) => {
+    const currDir = get().currentDir
+    fs.rmdirSync(`${currDir}/${directory}`)
   },
 }))
