@@ -1,5 +1,6 @@
-import { SystemFiles, File } from "../../../hooks/useFiles";
+import { type SystemFiles, type File } from "../../../hooks/useFiles";
 import { logo } from "./logo";
+import fs from "@zenfs/core"
 
 function splitCommand(commandString: string): string {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,11 +20,14 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
   case commandsList[0]:
     return help;
 
-  case commandsList[1]:
-    return fileSystem.files.map((v) => `${v.name}`).join("\t");
+  case commandsList[1]: {
+    const files = fs.readdirSync(fileSystem.currentDir)
+
+    return files.join("\t")
+  }
 
   case commandsList[2]:
-    return document.location.pathname;
+    return fileSystem.currentDir;
 
   case commandsList[3]:
     return document.location.hostname;
@@ -41,28 +45,36 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
     return logo;
 
   case splitCommand(commandsList[8]):
-    fileSystem.touchFile(args);
+    fileSystem.touchFile(ltrim(args));
     return ""
 
   case commandsList[9]: {
+    // ajustar data com space e filename que tem space
     const echo = ltrim(args)
-    const [data, echoArgs] = echo.split(/(?<=^\S+)\s/)
-    const [type, str] = echo.split(/(?<=^\S+)\s/)
+    const [data = "", filename] = echo.split(/[>]{2}|[>]/, 2)
 
-    if (type !== ">" && type !== ">>") {
-      return args
-    }
-
-    if (str === undefined) {
+    if (filename.trim().length === 0) {
       return "error at end of \\n, probably did not type anything at end"
     }
 
-    if (type === ">") {
-      fileSystem.redirectionFile({ name: args, data: args} as File);
+    let redirect = false
+    let appendRedirect = false
+
+
+    if (echo.includes(">>")) {
+      appendRedirect = true
+    } else if (echo.includes(">")) {
+      redirect = true
     }
 
-    if (type === ">>") {
-      fileSystem.appendRedirectionFile({ name: args, data: args} as File);
+    if (appendRedirect) {
+      fileSystem.appendRedirectionFile({ name: ltrim(filename), data: data} as File);
+      return ""
+    } else if (redirect) {
+      fileSystem.redirectionFile({ name: ltrim(filename), data: data} as File);
+      return ""
+    } else if (!appendRedirect && !redirect) {
+      return args
     }
 
     break
@@ -72,31 +84,78 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
     fileSystem.removeFile(args);
     return ""
 
+  case commandsList[11]: {
+    let dir = ltrim((args))
+    if (dir.slice(0, 2) === "./") {
+      dir = `${fileSystem.currentDir}${dir.slice(0, 1)}`
+    }
+
+    return fileSystem.changeDir(dir);
+  }
+
+  case commandsList[12]: {
+    // adjust the cat file
+    const currDir = fileSystem.currentDir
+    const contents = fs.readFileSync(`${currDir}/${args}`, 'utf-8');
+    return contents
+  }
+
+  case commandsList[13]:
+    fileSystem.removeFile(args);
+    return ""
+
+  case commandsList[14]:
+    fileSystem.removeFile(args);
+    return ""
+
+  case commandsList[15]:
+    fileSystem.removeFile(args);
+    return ""
+
   default:
     return `bash: command not found: ${command}.\r\n\rEnter "help" to see the list of supported commands`;
   }
 };
 
-const commands = {
-  "help": `\t\t  list all commands available`,
-  "ls": "\t\t  list all files in directory",
-  "pwd": `\t\t  print the current directory`,
-  "hostname": `\t  print the hostname`,
-  "ps": `\t\t  snap of current process`,
-  "fastfetch": `\t  fetch system information`,
-  "links": `\t\t  print my links`,
-  "logo": `\t\t  print the logo`,
-  "touch <filename>": ` create a file`,
-  "echo": `\t\t  echo something`,
-  "rm": `\t\t  remove a file`,
-};
+const commandsList: string[] = [
+  "help",
+  "ls",
+  "pwd",
+  "hostname",
+  "ps",
+  "fastfetch",
+  "links",
+  "logo",
+  "touch <filename>",
+  "echo",
+  "rm",
+  "cd",
+  "cat",
+  "mkdir",
+  "rmdir",
+  "blog",
+];
 
-const commandsList: string[] = Object.keys(commands);
-
-const help = `List of supported commands:\r\n\r\t
-${Object.entries(commands)
-    .map(([key, val]) => `${key} ${val}`)
-    .join("\r\n\r\t")}
+// ajustar os commandos
+const help = `List of supported commands:\r\n
+Normal commands supported like bash:\r\t
+ls \t\t  list all files in directory\r\t
+pwd\t\t  print the current directory\r\t
+hostname\t  print the hostname\r\t
+ps\t\t  snap of current process\r\t
+touch <filename> create a file\r\t
+echo\t\t  echo something\r\t
+rm\t\t  remove a file\r\t
+cd\t\t  changing directory\r\t
+cat\t\t  print the contents of a file\r\t
+mkdir\t\t  make a directory\r\t
+rmdir\t\t  remove a directory\r\n
+Custom commands supported:\r\t
+help\t\t  list all commands available\r\t
+fastfetch\t  fetch system information\r\t
+links\t\t  print my links\r\t
+logo\t\t  print the logo\r\t
+blog\t\t  go to my blog\r\t
 `;
 
 const DEBIAN_COLOR = "\u001b[38;2;215;10;83m";
