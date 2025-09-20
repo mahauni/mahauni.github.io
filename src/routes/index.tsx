@@ -1,15 +1,15 @@
 import HomePage from "../../features/home-page";
 
-import { createFileRoute } from "@tanstack/react-router"
+import { createRoute } from "@tanstack/react-router"
+import { rootRoute } from "./__root";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-})
-
-function Index() {
-  return (
+export const IndexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/",
+  component: () => (
     <>
       <HomePage />
     </>
-  );
-}
+  ),
+})
+

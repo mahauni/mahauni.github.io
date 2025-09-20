@@ -1,15 +1,13 @@
+import { createRoute } from "@tanstack/react-router";
 import BlogPage from "../../features/blog";
+import { rootRoute } from "./__root";
 
-import { createFileRoute } from "@tanstack/react-router"
-
-export const Route = createFileRoute("/blog")({
-  component: Blog,
-})
-
-function Blog() {
-  return (
+export const BlogRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/blog",
+  component: () => (
     <>
       <BlogPage />
     </>
-  );
-}
+  ),
+})
