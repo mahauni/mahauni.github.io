@@ -1,3 +1,4 @@
+import { UseNavigateResult } from "@tanstack/react-router";
 import { type SystemFiles, type File } from "../../../hooks/useFiles";
 import { logo } from "./logo";
 import fs from "@zenfs/core"
@@ -7,7 +8,7 @@ function ltrim(str: string): string {
   return str.replace(/^\s+/g, '');
 }
 
-const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => {
+const commandOuputs = async (commandString: string, fileSystem: SystemFiles, navigation: UseNavigateResult<string>) => {
   const [command, args = ""] = commandString.split(/(?<=^\S+)\s/)
   switch (command) {
   case commandsList[0]:
@@ -102,7 +103,7 @@ const commandOuputs = async (commandString: string, fileSystem: SystemFiles) => 
     return ""
 
   case commandsList[15]:
-    fileSystem.removeFile(args);
+    await navigation({ to: "/blog" })
     return ""
 
   default:
