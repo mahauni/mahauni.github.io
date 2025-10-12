@@ -1,4 +1,4 @@
-import { UseNavigateResult } from "@tanstack/react-router";
+import { type UseNavigateResult } from "@tanstack/react-router";
 import { type SystemFiles, type File } from "../../../hooks/useFiles";
 import { logo } from "./logo";
 import fs from "@zenfs/core"
