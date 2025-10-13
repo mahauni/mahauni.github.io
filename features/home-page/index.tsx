@@ -10,7 +10,6 @@ import { useNavigate } from "@tanstack/react-router"
 
 export default function HomePage() {
   const [terminalText, setTerminalText] = useState("");
-  const terminalHostName = "mahauni@debian~$ ";
   const fitAddon = new FitAddon();
   const webLiinksAddon = new WebLinksAddon();
   const files = useFiles()
@@ -20,7 +19,7 @@ export default function HomePage() {
 
   useEffect(() => {
     terminalRef.current?.terminal.writeln(logo);
-    terminalRef.current?.terminal.write(terminalHostName);
+    terminalRef.current?.terminal.write(files.getTerminalHostName());
 
     window.addEventListener("resize", () => {
       fitAddon.fit();
@@ -43,22 +42,22 @@ export default function HomePage() {
     if (terminalText === "clear" || terminalText === "cls") {
       terminal.reset();
       setTerminalText("");
-      terminal.write(terminalHostName);
+      terminal.write(files.getTerminalHostName());
       return false;
     }
 
     switch (code) {
     case 12:
       terminal.reset();
-      terminal.write(terminalHostName);
+      terminal.write(files.getTerminalHostName());
       break;
 
     case 13:
       commandOuputs(terminalText, files, navigation).then((output) => {
         terminal.write(`\r\n${output}\r\n`);
-        terminal.write(terminalHostName);
+        terminal.write(files.getTerminalHostName());
         setTerminalText("");
-      });
+      })
       break;
 
     case 27:

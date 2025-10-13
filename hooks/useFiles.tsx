@@ -11,6 +11,7 @@ export interface SystemFiles {
     removeFile: (filename: string) => void
     createDir: (directory: string) => void
     removeDir: (directory: string) => void
+    getTerminalHostName: () => string
 }
 
 export type File = {
@@ -28,7 +29,7 @@ function appendFileWithIndex(data: File, dir: string, arr: Array<File>, index: n
   const oldFile = arr[index]
 
   oldFile.data = oldFile.data + `\n${data.data}`
-    
+
   fs.writeFileSync(`${dir}/${oldFile.name}`, oldFile.data)
 
   return arr
@@ -39,7 +40,7 @@ function removeAfterLastSlash(str: string): string {
   if (lastIndex === -1) {
     return str;
   }
-  
+
   const dir = str.substring(0, lastIndex);
 
   return dir.length === 0 ? "/" : dir
@@ -146,4 +147,15 @@ export const useFiles = create<SystemFiles>()((set, get) => ({
     const currDir = get().currentDir
     fs.rmdirSync(`${currDir}/${directory}`)
   },
+  getTerminalHostName: () => {
+    let terminalHostName = ""
+    const currentDir = get().currentDir
+    if (currentDir === "/") {
+      terminalHostName = `mahauni@debian:~$ `;
+    } else {
+      terminalHostName = `mahauni@debian:~${currentDir}$ `;
+    }
+
+    return terminalHostName
+  }
 }))

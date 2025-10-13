@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Post from "./components/Post"
 import Prompt from "./components/Prompt"
 import { type BlogPost } from "./types/types";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function BlogPage() {
   const allPosts: BlogPost[] = [
@@ -79,6 +80,8 @@ Start small. Automate one task. Then another. Before you know it, you've built a
     }
   ];
 
+
+  const navigation = useNavigate()
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredPosts, setFilteredPosts] = useState(allPosts);
   const [currentPage, setCurrentPage] = useState(0);
@@ -124,6 +127,7 @@ Start small. Automate one task. Then another. Before you know it, you've built a
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleKeyDown = (e: any) => {
       if (e.target.tagName === 'INPUT') return;
       if (e.key === 'ArrowRight' || e.key === 'n') handleNext();
@@ -139,9 +143,21 @@ Start small. Automate one task. Then another. Before you know it, you've built a
       <div className="max-w-4xl mx-auto bg-neutral-900 border border-neutral-700 rounded-lg shadow-2xl overflow-hidden">
         {/* Terminal Header */}
         <div className="bg-neutral-800 px-4 py-3 flex items-center gap-2 border-b border-neutral-700">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div 
+            className="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:opacity-70 transition-opacity"
+            onClick={async () => {
+              await navigation({ to: "/" })
+            }}
+            title="Close"
+          ></div>
+          <div 
+            className="w-3 h-3 rounded-full bg-yellow-500 cursor-pointer hover:opacity-70 transition-opacity"
+            title="Minimize"
+          ></div>
+          <div 
+            className="w-3 h-3 rounded-full bg-green-500 cursor-pointer hover:opacity-70 transition-opacity"
+            title="Maximize"
+          ></div>
           <span className="ml-3 text-gray-500 text-sm">user@blog: ~/blog</span>
         </div>
 
@@ -195,7 +211,7 @@ Start small. Automate one task. Then another. Before you know it, you've built a
             />
             <span className="text-green-400">" posts/*</span>
           </Prompt>
-          
+
           {searchTerm && (
             <div className="ml-5 my-3">
               {filteredPosts.length > 0 ? (
