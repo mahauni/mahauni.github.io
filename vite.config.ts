@@ -12,4 +12,45 @@ export default defineConfig({
     react(),
   ],
   base: "/",
+
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core
+          'react-vendor': ['react', 'react-dom'],
+
+          // Router (TanStack Router is quite large)
+          'router': [
+            '@tanstack/react-router',
+            '@tanstack/history',
+          ],
+
+          // Terminal libraries (xterm is heavy)
+          'terminal': [
+            '@xterm/xterm',
+            '@xterm/addon-fit',
+            '@xterm/addon-web-links',
+          ],
+
+          // i18n translations
+          'i18n': [
+            'i18next',
+            'react-i18next',
+            'i18next-browser-languagedetector',
+            'i18next-http-backend',
+          ],
+
+          // Markdown rendering
+          'markdown': ['react-markdown'],
+
+          // File system
+          'filesystem': ['@zenfs/core'],
+
+          // State management
+          'state': ['zustand'],
+        },
+      },
+    },
+  },
 });

@@ -46,6 +46,13 @@ export default function HomePage() {
       return false;
     }
 
+    // Block Ctrl key combinations (codes 1-26, excluding specific ones you want)
+    if (code >= 1 && code <= 26 && code !== 12 && code !== 13) {
+      // Optionally handle specific Ctrl combinations you want to support
+      // For example, Ctrl+C (code 3), Ctrl+D (code 4), etc.
+      return;
+    }
+
     switch (code) {
     case 12:
       terminal.reset();

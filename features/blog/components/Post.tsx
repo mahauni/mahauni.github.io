@@ -1,13 +1,23 @@
 import { type BlogPost } from "../types/types"
+import { useNavigate } from "@tanstack/react-router";
 
 interface PostProps {
     post: BlogPost
 }
 
 export default function Post({ post }: PostProps) {
+  const navigation = useNavigate()
+
   return (
     <div className="ml-5 my-4 p-4 border-l-4 border-blue-400 bg-neutral-900">
-      <div className="text-yellow-400 text-lg font-bold mb-2"># {post.title}</div>
+      <div 
+        className="text-yellow-400 text-lg font-bold mb-2 cursor-pointer"
+        onClick={async () => {
+          await navigation({ to: `/blog/${post.id}` })
+        }}
+      >
+        # {post.title}
+      </div>
       <div className="text-gray-500 text-xs mb-3">
         📅 {post.date} | 👤 {post.author} | 🏷️ {post.tags}
       </div>

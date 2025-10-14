@@ -11,10 +11,11 @@ import "../i18n";
 import { rootRoute } from "./routes/__root"
 import { IndexRoute } from "./routes/index"
 import { BlogRoute } from "./routes/blog"
+import { BlogPostRoute } from "./routes/blog.$id"
 
 const hashHistory = createHashHistory()
 
-const routeTree = rootRoute.addChildren([IndexRoute, BlogRoute])
+const routeTree = rootRoute.addChildren([IndexRoute, BlogRoute, BlogPostRoute])
 
 const router = createRouter({
   routeTree,
