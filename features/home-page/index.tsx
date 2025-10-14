@@ -39,6 +39,8 @@ export default function HomePage() {
 
     if (terminal === null || terminalText.length < 0) return;
 
+    // this is wrong, because if i type clear and like, type backspace
+    // this clear the terminal even if i just want to delete the command
     if (terminalText === "clear" || terminalText === "cls") {
       terminal.reset();
       setTerminalText("");

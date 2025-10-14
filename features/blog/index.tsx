@@ -82,7 +82,7 @@ export default function BlogPage() {
             className="w-3 h-3 rounded-full bg-green-500 cursor-pointer hover:opacity-70 transition-opacity"
             title="Maximize"
           ></div>
-          <span className="ml-3 text-gray-500 text-sm">user@blog: ~/blog</span>
+          <span className="ml-3 text-gray-500 text-sm">mahauni@debian: ~/blog</span>
         </div>
 
         {/* Terminal Content */}

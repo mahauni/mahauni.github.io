@@ -29,7 +29,7 @@ export default function ArticlesPage({ id }: ArticlesPageProps) {
             className="w-3 h-3 rounded-full bg-green-500 cursor-pointer hover:opacity-70 transition-opacity"
             title="Maximize"
           ></div>
-          <span className="ml-3 text-gray-500 text-sm">user@blog: ~/articles</span>
+          <span className="ml-3 text-gray-500 text-sm">mahauni@debian: ~/blog</span>
         </div>
 
         {/* Terminal Content */}
@@ -37,9 +37,9 @@ export default function ArticlesPage({ id }: ArticlesPageProps) {
           {/* Command prompt */}
           <div className="flex items-center mb-6">
             <span className="text-blue-400 mr-2">➜</span>
-            <span className="text-blue-400 mr-2">~/articles</span>
+            <span className="text-blue-400 mr-2">~/blog</span>
             <span className="text-purple-400 mr-2">(main)</span>
-            <span className="text-green-400">cat article-{id}.md</span>
+            <span className="text-green-400">cat {BlogsList[id].filename}</span>
           </div>
 
           {/* Markdown Content with Terminal Styling */}
@@ -151,7 +151,7 @@ export default function ArticlesPage({ id }: ArticlesPageProps) {
           {/* End prompt */}
           <div className="flex items-center mt-8">
             <span className="text-blue-400 mr-2">➜</span>
-            <span className="text-blue-400 mr-2">~/articles</span>
+            <span className="text-blue-400 mr-2">~/blog</span>
             <span className="text-purple-400 mr-2">(main)</span>
             <span className="inline-block w-2 h-4 bg-gray-300 ml-1 animate-pulse"></span>
           </div>
