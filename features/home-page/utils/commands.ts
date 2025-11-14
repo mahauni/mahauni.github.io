@@ -1,113 +1,138 @@
 import { type UseNavigateResult } from "@tanstack/react-router";
 import { type SystemFiles, type File } from "../../../hooks/useFiles";
 import { logo } from "./logo";
-import fs from "@zenfs/core"
+import fs from "@zenfs/core";
 
 function ltrim(str: string): string {
-  if(!str) return str;
-  return str.replace(/^\s+/g, '');
+  if (!str) return str;
+  return str.replace(/^\s+/g, "");
 }
 
-const commandOuputs = async (commandString: string, fileSystem: SystemFiles, navigation: UseNavigateResult<string>) => {
-  const [command, args = ""] = commandString.split(/(?<=^\S+)\s/)
+const commandOuputs = async (
+  commandString: string,
+  fileSystem: SystemFiles,
+  navigation: UseNavigateResult<string>,
+) => {
+  const [command, args = ""] = commandString.split(/(?<=^\S+)\s/);
   switch (command) {
-  case commandsList[0]:
-    return help;
+    // "help"
+    case commandsList[0]:
+      return help;
 
-  case commandsList[1]: {
-    const files = fs.readdirSync(fileSystem.currentDir)
+    // "ls"
+    case commandsList[1]: {
+      const files = fs.readdirSync(fileSystem.currentDir);
 
-    return files.join("\t")
-  }
-
-  case commandsList[2]:
-    return fileSystem.currentDir;
-
-  case commandsList[3]:
-    return document.location.hostname;
-
-  case commandsList[4]:
-    return "Your browser is definitely running. That's the only thing I can say 🤪";
-
-  case commandsList[5]:
-    return fastfetch;
-
-  case commandsList[6]:
-    return links;
-
-  case commandsList[7]:
-    return logo;
-
-  case commandsList[8]:
-    fileSystem.touchFile(ltrim(args));
-    return ""
-
-  case commandsList[9]: {
-    // ajustar data com space e filename que tem space
-    const echo = ltrim(args)
-    const [data = "", filename] = echo.split(/[>]{2}|[>]/, 2)
-
-    if (filename.trim().length === 0) {
-      return "error at end of \\n, probably did not type anything at end"
+      return files.join("\t");
     }
 
-    let redirect = false
-    let appendRedirect = false
+    // "pwd"
+    case commandsList[2]:
+      return fileSystem.currentDir;
 
+    // "hostname"
+    case commandsList[3]:
+      return document.location.hostname;
 
-    if (echo.includes(">>")) {
-      appendRedirect = true
-    } else if (echo.includes(">")) {
-      redirect = true
+    // "ps"
+    case commandsList[4]:
+      return "Your browser is definitely running. That's the only thing I can say 🤪";
+
+    // "fastfetch"
+    case commandsList[5]:
+      return fastfetch;
+
+    // "links"
+    case commandsList[6]:
+      return links;
+
+    // "logo"
+    case commandsList[7]:
+      return logo;
+
+    // "touch"
+    case commandsList[8]:
+      fileSystem.touchFile(ltrim(args));
+      return "";
+
+    // "echo"
+    case commandsList[9]: {
+      // ajustar data com space e filename que tem space
+      const echo = ltrim(args);
+      const [data = "", filename] = echo.split(/[>]{2}|[>]/, 2);
+
+      if (filename.trim().length === 0) {
+        return "error at end of \\n, probably did not type anything at end";
+      }
+
+      let redirect = false;
+      let appendRedirect = false;
+
+      if (echo.includes(">>")) {
+        appendRedirect = true;
+      } else if (echo.includes(">")) {
+        redirect = true;
+      }
+
+      if (appendRedirect) {
+        fileSystem.appendRedirectionFile({
+          name: ltrim(filename),
+          data: data,
+        } as File);
+        return "";
+      } else if (redirect) {
+        fileSystem.redirectionFile({
+          name: ltrim(filename),
+          data: data,
+        } as File);
+        return "";
+      } else if (!appendRedirect && !redirect) {
+        return args;
+      }
+
+      break;
     }
 
-    if (appendRedirect) {
-      fileSystem.appendRedirectionFile({ name: ltrim(filename), data: data} as File);
-      return ""
-    } else if (redirect) {
-      fileSystem.redirectionFile({ name: ltrim(filename), data: data} as File);
-      return ""
-    } else if (!appendRedirect && !redirect) {
-      return args
+    // "rm"
+    case commandsList[10]:
+      fileSystem.removeFile(args);
+      return "";
+
+    // "cd"
+    case commandsList[11]: {
+      let dir = ltrim(args);
+      if (dir.slice(0, 2) === "./") {
+        dir = `${fileSystem.currentDir}${dir.slice(0, 1)}`;
+      }
+
+      return fileSystem.changeDir(dir);
     }
 
-    break
-  }
-
-  case commandsList[10]:
-    fileSystem.removeFile(args);
-    return ""
-
-  case commandsList[11]: {
-    let dir = ltrim((args))
-    if (dir.slice(0, 2) === "./") {
-      dir = `${fileSystem.currentDir}${dir.slice(0, 1)}`
+    // "cat"
+    case commandsList[12]: {
+      // adjust the cat file
+      const currDir = fileSystem.currentDir;
+      const contents = fs.readFileSync(`${currDir}/${args}`, "utf-8");
+      return contents;
     }
 
-    return fileSystem.changeDir(dir);
-  }
+    // "mkdir"
+    case commandsList[13]:
+      fileSystem.createDir(args);
+      return "";
 
-  case commandsList[12]: {
-    // adjust the cat file
-    const currDir = fileSystem.currentDir
-    const contents = fs.readFileSync(`${currDir}/${args}`, 'utf-8');
-    return contents
-  }
+    // "rmdir"
+    case commandsList[14]:
+      fileSystem.removeDir(args);
+      return "";
 
-  case commandsList[13]:
-    fileSystem.createDir(args);
-    return ""
+    // "blog"
+    case commandsList[15]:
+      await navigation({ to: "/blog" });
+      return "";
 
-  case commandsList[14]:
-    fileSystem.removeDir(args);
-    return ""
-
-  case commandsList[15]:
-    await navigation({ to: "/blog" })
-    return ""
-
-  default:
-    return `bash: command not found: ${command}.\r\n\rEnter "help" to see the list of supported commands`;
+    default:
+      return `bash: command not found: ${command}.\r\n\rEnter "help" to see the list of supported commands`;
   }
 };
 

@@ -6,14 +6,14 @@ import { FitAddon } from "@xterm/addon-fit";
 import { TokyoNightTheme } from "./utils/tokyonight";
 import { WebLinksAddon } from "@xterm/addon-web-links";
 import { useFiles } from "../../hooks/useFiles.tsx";
-import { useNavigate } from "@tanstack/react-router"
+import { useNavigate } from "@tanstack/react-router";
 
 export default function HomePage() {
   const [terminalText, setTerminalText] = useState("");
   const fitAddon = new FitAddon();
   const webLiinksAddon = new WebLinksAddon();
-  const files = useFiles()
-  const navigation = useNavigate()
+  const files = useFiles();
+  const navigation = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const terminalRef = useRef<any>(null);
 
@@ -56,38 +56,38 @@ export default function HomePage() {
     }
 
     switch (code) {
-    case 12:
-      terminal.reset();
-      terminal.write(files.getTerminalHostName());
-      break;
-
-    case 13:
-      commandOuputs(terminalText, files, navigation).then((output) => {
-        terminal.write(`\r\n${output}\r\n`);
+      case 12:
+        terminal.reset();
         terminal.write(files.getTerminalHostName());
-        setTerminalText("");
-      })
-      break;
+        break;
 
-    case 27:
-      if (data.endsWith("A") || data.endsWith("B")) return;
+      case 13:
+        commandOuputs(terminalText, files, navigation).then((output) => {
+          terminal.write(`\r\n${output}\r\n`);
+          terminal.write(files.getTerminalHostName());
+          setTerminalText("");
+        });
+        break;
 
-      terminal.write(data);
-      setTerminalText((prevState) => prevState + data);
-      break;
+      case 27:
+        if (data.endsWith("A") || data.endsWith("B")) return;
 
-    case 127:
-      if (terminalText) {
-        terminal.write(`\b \b`);
-        setTerminalText((prevState) =>
-          prevState.substring(0, prevState.length - 1),
-        );
-      }
-      break;
+        terminal.write(data);
+        setTerminalText((prevState) => prevState + data);
+        break;
 
-    default:
-      terminal.write(data);
-      setTerminalText((prevState) => prevState + data);
+      case 127:
+        if (terminalText) {
+          terminal.write(`\b \b`);
+          setTerminalText((prevState) =>
+            prevState.substring(0, prevState.length - 1),
+          );
+        }
+        break;
+
+      default:
+        terminal.write(data);
+        setTerminalText((prevState) => prevState + data);
     }
   }
 
