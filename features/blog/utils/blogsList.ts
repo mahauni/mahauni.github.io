@@ -1,8 +1,5 @@
 import { type BlogPost } from "../types/types";
-
-// @ts-expect-error: raw markdown import
 import article1 from "../../../blogs/article1.md?raw";
-// @ts-expect-error: raw markdown import
 import article2 from "../../../blogs/article2.md?raw";
 
 export const BlogsList: BlogPost[] = [
