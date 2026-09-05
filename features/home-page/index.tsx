@@ -39,15 +39,6 @@ export default function HomePage() {
 
     if (terminal === null || terminalText.length < 0) return;
 
-    // this is wrong, because if i type clear and like, type backspace
-    // this clear the terminal even if i just want to delete the command
-    if (terminalText === "clear" || terminalText === "cls") {
-      terminal.reset();
-      setTerminalText("");
-      terminal.write(files.getTerminalHostName());
-      return false;
-    }
-
     // Block Ctrl key combinations (codes 1-26, excluding specific ones you want)
     if (code >= 1 && code <= 26 && code !== 12 && code !== 13) {
       // Optionally handle specific Ctrl combinations you want to support
@@ -62,6 +53,13 @@ export default function HomePage() {
         break;
 
       case 13:
+        if (terminalText === "clear" || terminalText === "cls") {
+          terminal.reset();
+          terminal.write(files.getTerminalHostName());
+          setTerminalText("");
+          break;
+        }
+
         commandOuputs(terminalText, files, navigation).then((output) => {
           terminal.write(`\r\n${output}\r\n`);
           terminal.write(files.getTerminalHostName());

@@ -61,10 +61,6 @@ const commandOuputs = async (
       const echo = ltrim(args);
       const [data = "", filename] = echo.split(/[>]{2}|[>]/, 2);
 
-      if (filename.trim().length === 0) {
-        return "error at end of \\n, probably did not type anything at end";
-      }
-
       let redirect = false;
       let appendRedirect = false;
 
@@ -72,6 +68,10 @@ const commandOuputs = async (
         appendRedirect = true;
       } else if (echo.includes(">")) {
         redirect = true;
+      }
+
+      if ((redirect || appendRedirect) && (!filename || filename.trim().length === 0)) {
+        return "error at end of \\n, probably did not type anything at end";
       }
 
       if (appendRedirect) {
@@ -86,11 +86,9 @@ const commandOuputs = async (
           data: data,
         } as File);
         return "";
-      } else if (!appendRedirect && !redirect) {
-        return args;
       }
 
-      break;
+      return args;
     }
 
     // "rm"

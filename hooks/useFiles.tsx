@@ -136,7 +136,7 @@ export const useFiles = create<SystemFiles>()((set, get) => ({
     const currDir = get().currentDir
     fs.unlinkSync(`${currDir}/${filename}`)
     set(({ files }) => ({
-      files: files.splice(files.findIndex(v => v.name !== filename), 1)
+      files: files.filter(v => v.name !== filename)
     }))
   },
   createDir: (directory) => {
