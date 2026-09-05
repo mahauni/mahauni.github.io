@@ -11,7 +11,7 @@ export const BlogPostRoute = createRoute({
 
     return (
       <>
-        <ArticlesPage id={Number(id)} />
+        <ArticlesPage id={id} />
       </>
     )
   },

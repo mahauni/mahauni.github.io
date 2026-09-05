@@ -1,3 +1,10 @@
+---
+title: Why I did this
+date: 2025-10-14
+author: admin
+tags: zsh, terminal, idk
+---
+
 # Why I'm doing this website and why this style
 
 ## I love the terminal

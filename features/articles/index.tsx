@@ -3,11 +3,28 @@ import { BlogsList } from "../blog/utils/blogsList"
 import { useNavigate } from "@tanstack/react-router";
 
 interface ArticlesPageProps {
-    id: number
+    id: string
 }
 
 export default function ArticlesPage({ id }: ArticlesPageProps) {
   const navigation = useNavigate()
+  const post = BlogsList.find((p) => p.id === id)
+
+  if (!post) {
+    return (
+      <div className="min-h-screen bg-neutral-900 text-gray-300 p-5 font-mono flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-400 mb-4">cat: {id}: No such post</p>
+          <button
+            onClick={async () => await navigation({ to: "/blog" })}
+            className="text-blue-400 hover:underline"
+          >
+            ← back to blog
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-neutral-900 text-gray-300 p-5 font-mono">
@@ -39,7 +56,7 @@ export default function ArticlesPage({ id }: ArticlesPageProps) {
             <span className="text-blue-400 mr-2">➜</span>
             <span className="text-blue-400 mr-2">~/blog</span>
             <span className="text-purple-400 mr-2">(main)</span>
-            <span className="text-green-400">cat {BlogsList[id].filename}</span>
+            <span className="text-green-400">cat {post.filename}</span>
           </div>
 
           {/* Markdown Content with Terminal Styling */}
@@ -144,7 +161,7 @@ export default function ArticlesPage({ id }: ArticlesPageProps) {
                 ),
               }}
             >
-              {BlogsList[id].blog}
+              {post.blog}
             </ReactMarkdown>
           </div>
 

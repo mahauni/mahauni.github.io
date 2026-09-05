@@ -41,7 +41,7 @@ await configure({
 });
 
 for (const blog of BlogsList) {
-  fs.writeFileSync(`/blog/${blog.filename}`, blog.blog ?? "");
+  fs.writeFileSync(`/blog/${blog.filename}`, blog.blog);
 }
 
 createRoot(document.getElementById("root")!).render(
